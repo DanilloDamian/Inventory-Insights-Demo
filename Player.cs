@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
 
     private UIManager uiManager;
 
+    public bool hasCoin = false;
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -93,8 +95,6 @@ public class Player : MonoBehaviour
         currentAmmo = maxAmmo;
         uiManager.UpdateTextAmmo(currentAmmo);
         isReLoading = false;
-    }
-
-
+    }   
 
 }
