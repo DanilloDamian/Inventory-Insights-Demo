@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     private GameObject hitMarketPrefab;
     [SerializeField]
     private AudioSource weaponAudio;
+    [SerializeField] 
+    private GameObject weapon;
 
     [SerializeField]
     private int currentAmmo;
@@ -35,7 +37,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButton(0) && currentAmmo > 0 && !isReLoading)
+        if (Input.GetMouseButton(0) && currentAmmo > 0 && !isReLoading && weapon.activeInHierarchy)
         {
             Shoot();
         }
