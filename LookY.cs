@@ -5,7 +5,7 @@ using UnityEngine;
 public class LookY : MonoBehaviour
 {
     [SerializeField]
-    private float sensitivity = 1f;
+    private float sensitivity = 0.5f;
 
     void Update()
     {

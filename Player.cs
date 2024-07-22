@@ -59,6 +59,7 @@ public class Player : MonoBehaviour
         CalculateMovement();
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            Application.Quit();
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
