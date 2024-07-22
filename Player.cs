@@ -76,6 +76,12 @@ public class Player : MonoBehaviour
         {
             GameObject hitMarket = Instantiate(hitMarketPrefab, hitInfo.point, Quaternion.LookRotation(hitInfo.normal)) as GameObject;
             Destroy(hitMarket, 1f);
+
+            Destructable crate = hitInfo.transform.GetComponent<Destructable>();
+            if (crate)
+            {
+                crate.DestroyBox();
+            }
         }
     }
 
