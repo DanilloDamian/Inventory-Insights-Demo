@@ -4,14 +4,8 @@ using UnityEngine;
 
 public class LookY : MonoBehaviour
 {
-
     [SerializeField]
     private float sensitivity = 1f;
-
-    void Start()
-    {
-
-    }
 
     void Update()
     {

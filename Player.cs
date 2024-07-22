@@ -11,20 +11,21 @@ public class Player : MonoBehaviour
     private GameObject hitMarketPrefab;
     [SerializeField]
     private AudioSource weaponAudio;
-    [SerializeField] 
+    [SerializeField]
     private GameObject weapon;
-
+    [SerializeField]
+    private GameObject textNeedReload;
+    [SerializeField]
+    private GameObject textReloading;
     [SerializeField]
     private int currentAmmo;
-    private int maxAmmo = 50;
 
+    private int maxAmmo = 50;
     private float gravity = 9.81f;
     private CharacterController characterController;
-    private bool isReLoading = false;
-
     private UIManager uiManager;
-
-    public bool hasCoin = false;
+    private bool isReLoading = false;
+    public bool HasCoin = false;
 
     void Start()
     {
@@ -46,12 +47,15 @@ public class Player : MonoBehaviour
             muzzleFlash.SetActive(false);
             weaponAudio.Stop();
         }
-        if (Input.GetKeyDown(KeyCode.R) && !isReLoading)
+        if (Input.GetKeyDown(KeyCode.R) && !isReLoading && weapon.activeInHierarchy)
         {
             isReLoading = true;
             StartCoroutine(Reload());
         }
-
+        if (currentAmmo <= 0 && !isReLoading && weapon.activeInHierarchy)
+        {
+            textNeedReload.SetActive(true);
+        }
         CalculateMovement();
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -59,6 +63,7 @@ public class Player : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
         }
     }
+
     private void Shoot()
     {
         muzzleFlash.SetActive(true);
@@ -99,10 +104,18 @@ public class Player : MonoBehaviour
 
     IEnumerator Reload()
     {
-        yield return new WaitForSeconds(1.5f);
+        textNeedReload.SetActive(false);
+
+        for (int i = 0; i < 6; i++)
+        {
+            textReloading.SetActive(true);
+            yield return new WaitForSeconds(0.2f);
+            textReloading.SetActive(false);
+            yield return new WaitForSeconds(0.2f);
+        }
         currentAmmo = maxAmmo;
         uiManager.UpdateTextAmmo(currentAmmo);
         isReLoading = false;
-    }   
+    }
 
 }

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SharkShop : MonoBehaviour
 {
-
     [SerializeField]
     private AudioClip buyWeapon;
     [SerializeField]
@@ -17,6 +16,8 @@ public class SharkShop : MonoBehaviour
     private GameObject textDontCoin;
     [SerializeField]
     private GameObject weapon;
+    [SerializeField]
+    private GameObject ammoText;
 
     private UIManager uiManager;
     private bool shopActive = false;
@@ -35,18 +36,19 @@ public class SharkShop : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKey(KeyCode.Return))
                 {
-                    if (player.hasCoin)
+                    if (player.HasCoin)
                     {
                         AudioSource.PlayClipAtPoint(buyWeapon, transform.position, 1f);
                         uiManager.BuyWeapon();
                         uiManager.CloseShop();
                         uiManager.SpendCoin();
-                        player.hasCoin = false;
+                        ammoText.SetActive(true);
+                        player.HasCoin = false;
                         shopActive = false;
                     }
                     else
                     {
-                        AudioSource.PlayClipAtPoint(dontCoins, transform.position, 1f);
+                        AudioSource.PlayClipAtPoint(dontCoins, transform.position, 100f);
                         uiManager.CloseShop();
                         shopActive = false;
                         textShopAccess.SetActive(false);
@@ -87,6 +89,7 @@ public class SharkShop : MonoBehaviour
             }
         }
     }
+
     void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player")

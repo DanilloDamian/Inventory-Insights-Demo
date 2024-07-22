@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Destructable : MonoBehaviour {
-
+public class Destructable : MonoBehaviour 
+{
 	[SerializeField]
 	private GameObject boxDestroyed;
 
